@@ -6,10 +6,11 @@ import Typography from '@material-ui/core/Typography';
 
 import { Consumer } from './context';
 import * as event from './event';
+import { Route } from './state';
 
 export default () =>
     <Consumer>
-        {({dispatch}) =>
+        {({state, dispatch}) =>
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="title" style={{flex: 1}}>
@@ -17,8 +18,12 @@ export default () =>
                     </Typography>
                     <Button variant="contained"
                             color="secondary"
-                            onClick={() => dispatch(new event.Compare())}>
-                        Compare
+                            onClick={() => dispatch(
+                                state.route == Route.Datacodes ?
+                                    new event.ShowDocuments() :
+                                    new event.ShowDatacodes()
+                            )}>
+                        {state.route == Route.Datacodes ? 'Documents' : 'Datacodes' }
                     </Button>
                     <div style={{flex: 1}} />
                 </Toolbar>
