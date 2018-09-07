@@ -5,10 +5,12 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "desktop": "electron ."
   },
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
+    "electron": "^2.0.8",
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-template": "^6.2.0",
     "source-map-loader": "^0.2.4",
