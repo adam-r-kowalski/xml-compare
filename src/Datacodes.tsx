@@ -7,13 +7,28 @@ import { Consumer } from './context';
 import Columns from './Columns';
 import { State } from './state';
 
+const listItemStyle = (state: State, title: string, code: string) => ({
+    color: state.uniqueDatacodes[title].has(code) ? state.theme.palette.secondary.main : 'black',
+    fontSize: 22,
+    fontFamily: "Roboto",
+    margin: 10
+});
+
 const datacode = (state: State, title: string) =>
-    <Card style={{ flex: 1 }}>
+    <Card style={{ flex: 1 }} key={title}>
         <CardContent>
             <Typography variant="title">
                 {title}
             </Typography>
-            {state.datacodes[title].map(datacode => <div>{datacode}</div>)}
+            {[...state.datacodes[title]]
+                .sort((a, b) => {
+                    if (state.uniqueDatacodes[title].has(a)) return -1;
+                    if (state.uniqueDatacodes[title].has(b)) return 1;
+                    return a < b ? -1 : 1;
+                })
+                .map(datacode =>
+                    <div style={listItemStyle(state, title, datacode)}>{datacode}</div>)
+            }
         </CardContent>
     </Card>;
 

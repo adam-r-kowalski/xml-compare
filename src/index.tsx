@@ -9,13 +9,6 @@ import { Event } from './event';
 import Router from './Router';
 import AppBar from './AppBar';
 
-const theme = createMuiTheme({
-    palette: {
-        primary: colors.lightGreen,
-        secondary: colors.orange
-    }
-});
-
 document.body.style.margin = "0";
 document.body.style.height = "100vh";
 
@@ -29,7 +22,7 @@ class App extends React.Component<any, State> {
 
     render = () => 
         <Provider value={{ state: this.state, dispatch: this.dispatch }}>
-            <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={this.state.theme}>
                 <AppBar />
                 <Router />
             </MuiThemeProvider>
